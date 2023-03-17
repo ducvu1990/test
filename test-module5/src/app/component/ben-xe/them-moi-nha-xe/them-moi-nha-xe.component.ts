@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {LoaiXe} from '../../../model/loai-xe';
 import {NhaXe} from '../../../model/nha-xe';
 import {DiaDiem} from '../../../model/dia-diem';
 import {BenXeService} from '../../../service/ben-xe.service';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
+import {Time} from '@angular/common';
 
 @Component({
   selector: 'app-them-moi-nha-xe',
@@ -38,10 +39,10 @@ export class ThemMoiNhaXeComponent implements OnInit {
       nhaXe: new FormControl('', Validators.required),
       diemDi: new FormControl('', Validators.required),
       diemDen: new FormControl('', Validators.required),
-      soDienThoai: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-      gioDi: new FormControl('', Validators.required),
-      gioDen: new FormControl('', Validators.required),
+      soDienThoai: new FormControl('', [Validators.required, Validators.pattern('^(090|093|097)\\d{7}$')]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      gioDi: new FormControl('', [Validators.required, this.validateTimeRange]),
+      gioDen: new FormControl('', [Validators.required, this.validateTimeRange]),
     });
   }
 
@@ -61,5 +62,19 @@ export class ThemMoiNhaXeComponent implements OnInit {
         'error'
       );
     });
+  }
+
+  validateTimeRange(control: AbstractControl) {
+    const [hours, minutes] = control.value.split(':').map(Number);
+    const hour: Time = {hours, minutes};
+    if (isNaN(hour.hours) || isNaN(hour.minutes)) {
+      return {timerange: true};
+    }
+    const minHour: Time = {hours: 5, minutes: 0};
+    const maxHour: Time = {hours: 23, minutes: 0};
+    if (hour.hours < minHour.hours || (hour.hours === maxHour.hours && hour.minutes > maxHour.minutes) || hour.hours > maxHour.hours) {
+      return {timerange: true};
+    }
+    return null;
   }
 }

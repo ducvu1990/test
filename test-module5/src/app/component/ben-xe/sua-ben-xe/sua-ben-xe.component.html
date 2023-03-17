@@ -52,6 +52,8 @@
     <input type="text" name="" formControlName="soDienThoai" class="form-control" placeholder="" >
     <span style="color: red"
           *ngIf="rfBenXe.controls.soDienThoai.touched && rfBenXe.controls.soDienThoai?.errors?.required">Phải nhập trường này.</span>
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.soDienThoai.touched && rfBenXe.controls.soDienThoai?.errors?.pattern">Số điện thoại sai định dạng.</span>
   </div>
 
   <div class="form-group">
@@ -59,6 +61,8 @@
     <input type="text" name="" formControlName="email" class="form-control" placeholder="" >
     <span style="color: red"
           *ngIf="rfBenXe.controls.email.touched && rfBenXe.controls.email?.errors?.required">Phải nhập trường này.</span>
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.email.touched && rfBenXe.controls.email?.errors?.email">Email sai định dạng.</span>
   </div>
 
   <div class="form-group">
@@ -66,6 +70,9 @@
     <input type="text" name="" formControlName="gioDi" class="form-control" placeholder="" >
     <span style="color: red"
           *ngIf="rfBenXe.controls.gioDi.touched && rfBenXe.controls.gioDi?.errors?.required">Phải nhập trường này.</span>
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.gioDi.touched && rfBenXe.controls.gioDi?.errors?.timerange">Giờ không hợp lệ.
+      Giờ có định dạng là: --:--, sau 05:00 và trước 23:00.</span>
   </div>
 
   <div class="form-group">
@@ -73,10 +80,13 @@
     <input type="text" name="" formControlName="gioDen" class="form-control" placeholder="" >
     <span style="color: red"
           *ngIf="rfBenXe.controls.gioDen.touched && rfBenXe.controls.gioDen?.errors?.required">Phải nhập trường này.</span>
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.gioDen.touched && rfBenXe.controls.gioDen?.errors?.timerange">Giờ không hợp lệ.
+      Giờ có định dạng là: --:--, sau 05:00 và trước 23:00.</span>
   </div>
 
   <div class="form-group">
     <label ></label>
-    <button type="submit" > save</button>
+    <button type="submit" [disabled]="rfBenXe.invalid" class="btn btn-primary">Save</button>
   </div>
 </form>
