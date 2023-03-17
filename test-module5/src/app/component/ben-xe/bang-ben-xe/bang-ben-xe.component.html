@@ -1,0 +1,36 @@
+<h1>Danh Sách Nhà Xe</h1>
+<a routerLink="/benXe/create">Thêm Mới Nhà Xe</a>
+<table class="table">
+  <thead>
+  <tr>
+    <th>soXe</th>
+    <th>loaiXe</th>
+    <th>tenNhaXe</th>
+    <th>diemDi</th>
+    <th>diemDen</th>
+    <th>soDienThoai</th>
+    <th>email</th>
+    <th>gioDi</th>
+    <th>gioDen</th>
+    <th>Tùy Chọn</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let benXe of benXes">
+    <td scope="row">{{benXe.soXe}}</td>
+    <td>{{benXe.loaiXe.tenLoaiXe}}</td>
+    <td>{{benXe.nhaXe.tenNhaXe}}</td>
+    <td>{{benXe.diemDi.tenDiaDiem}}</td>
+    <td>{{benXe.diemDen.tenDiaDiem}}</td>
+    <td>{{benXe.soDienThoai}}</td>
+    <td>{{benXe.email}}</td>
+    <td>{{benXe.gioDi}}</td>
+    <td>{{benXe.gioDen}}</td>
+    <td>
+      <a routerLink="/benXe/edit/{{benXe.id}}">Sữa</a>
+      <span>|</span>
+      <a (click)="delete(benXe.soXe, benXe.id)">Xóa</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
