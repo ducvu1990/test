@@ -46,7 +46,7 @@ export class BangBenXeComponent implements OnInit {
   }
 
   nextPage() {
-    if (this.page < this.pageCount) {
+    if (this.page < (this.pageCount - 1)) {
       this.page++;
       this.getAll();
     }
