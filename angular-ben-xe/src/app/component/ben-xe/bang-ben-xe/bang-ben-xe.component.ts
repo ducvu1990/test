@@ -11,7 +11,7 @@ import {FormGroup} from '@angular/forms';
 })
 export class BangBenXeComponent implements OnInit {
   benXes: BenXe[];
-  soXe: string;
+  soXe = '';
 
   constructor(private benXeService: BenXeService) {
   }
@@ -20,9 +20,15 @@ export class BangBenXeComponent implements OnInit {
     this.getAll();
   }
 
+  onSearch(soXe: string) {
+    this.soXe = soXe;
+    this.ngOnInit();
+  }
+
   getAll() {
     this.benXeService.getAll(this.soXe).subscribe(benXees => {
       this.benXes = benXees.content;
+      debugger
     });
   }
 
@@ -56,9 +62,5 @@ export class BangBenXeComponent implements OnInit {
         }
       });
     });
-  }
-
-  onSearch(soXe: string) {
-    this.soXe = soXe;
   }
 }

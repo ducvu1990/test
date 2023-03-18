@@ -1,10 +1,8 @@
 package com.codegym.ben_xe.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.Set;
 
 @Entity

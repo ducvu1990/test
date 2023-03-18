@@ -1,32 +1,71 @@
 package com.codegym.ben_xe.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
 
 import javax.persistence.*;
-import java.util.Set;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import javax.validation.constraints.Pattern;
+
 
 @Entity
-public class BenXe {
+public class BenXe implements Validator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotBlank(message = "không được để khoảng trống")
     private String soXe;
+
+    @NotBlank(message = "không được để khoảng trống")
+    @Pattern(regexp = "^(090|093|097)\\d{7}$",message = "Số điẹn thoại không đúng định dạng")
     private String soDienThoai;
+    @NotBlank(message = "không được để khoảng trống")
+    @Email(message = "Email phải đúng định dạng")
     private String email;
+    @NotBlank(message = "không được để khoảng trống")
     private String gioDi;
+    @NotBlank(message = "không được để khoảng trống")
     private String gioDen;
+
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        BenXe benXe = (BenXe) target;
+        String gioDies = benXe.getGioDi();
+
+        if (false){
+            errors.rejectValue("dateOfBirth", "dateOfBirth","ngày sinh không đúng, bạn phải " +
+                    "lớn hơn 18 tuổi và nhỏ hơn 90 tuổi");
+        }
+    }
+
+    @NotBlank(message = "không được để khoảng trống")
     @ManyToOne
     @JoinColumn(name = "laoiXeId",referencedColumnName = "id")
     private LoaiXe  loaiXe;
+    @NotBlank(message = "không được để khoảng trống")
     @ManyToOne
     @JoinColumn(name = "nhaXeId",referencedColumnName = "id")
     private NhaXe nhaXe;
+    @NotBlank(message = "không được để khoảng trống")
     @ManyToOne
     @JoinColumn(name = "diemDiId",referencedColumnName = "id")
     private  DiaDiem diemDi;
+    @NotBlank(message = "không được để khoảng trống")
     @ManyToOne
     @JoinColumn(name = "diemDenId",referencedColumnName = "id")
     private DiaDiem diemDen;
+
+
 
     public BenXe() {
     }

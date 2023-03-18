@@ -1,0 +1,92 @@
+<h1>Sửa thông tin bến xe</h1>
+<form [formGroup]="rfBenXe" (ngSubmit)="updateBenXe()">
+  <div class="form-group" hidden="hidden">
+    <label >id</label>
+    <input type="text" readonly name="" formControlName="id" class="form-control" placeholder="" >
+  </div>
+  <div class="form-group">
+    <label >soXe</label>
+    <input type="text" readonly name="" formControlName="soXe" class="form-control" placeholder="" >
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.soXe.touched && rfBenXe.controls.soXe?.errors?.required">Phải nhập trường này.</span>
+  </div>
+
+  <div class="form-group">
+    <label >loaiXe</label>
+    <select class="form-control" formControlName="loaiXe">
+      <option *ngFor="let loaiXe of loaiXes" [ngValue]="loaiXe">{{loaiXe.tenLoaiXe}}</option>
+    </select>
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.loaiXe.touched && rfBenXe.controls.loaiXe?.errors?.required">Phải nhập trường này.</span>
+  </div>
+
+  <div class="form-group">
+    <label >tenNhaXe</label>
+    <select class="form-control" formControlName="nhaXe">
+      <option *ngFor="let nhaXe of nhaXes" [ngValue]="nhaXe">{{nhaXe.tenNhaXe}}</option>
+    </select>
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.nhaXe.touched && rfBenXe.controls.nhaXe?.errors?.required">Phải nhập trường này.</span>
+  </div>
+
+  <div class="form-group">
+    <label >diemDi</label>
+    <select class="form-control" formControlName="diemDi">
+      <option *ngFor="let diemi of diaDiems" [ngValue]="diemi">{{diemi.tenDiaDiem}}</option>
+    </select>
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.diemDi.touched && rfBenXe.controls.diemDi?.errors?.required">Phải nhập trường này.</span>
+  </div>
+
+  <div class="form-group">
+    <label >diemDen</label>
+    <select class="form-control" formControlName="diemDen">
+      <option *ngFor="let diemDe of diaDiems" [ngValue]="diemDe" >{{diemDe.tenDiaDiem}}</option>
+    </select>
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.diemDen.touched && rfBenXe.controls.diemDen?.errors?.required">Phải nhập trường này.</span>
+  </div>
+
+  <div class="form-group">
+    <label >soDienThoai</label>
+    <input type="text" name="" formControlName="soDienThoai" class="form-control" placeholder="" >
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.soDienThoai.touched && rfBenXe.controls.soDienThoai?.errors?.required">Phải nhập trường này.</span>
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.soDienThoai.touched && rfBenXe.controls.soDienThoai?.errors?.pattern">Số điện thoại sai định dạng.</span>
+  </div>
+
+  <div class="form-group">
+    <label >email</label>
+    <input type="text" name="" formControlName="email" class="form-control" placeholder="" >
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.email.touched && rfBenXe.controls.email?.errors?.required">Phải nhập trường này.</span>
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.email.touched && rfBenXe.controls.email?.errors?.email">Email sai định dạng.</span>
+  </div>
+
+  <div class="form-group">
+    <label >gioDi</label>
+    <input type="text" name="" formControlName="gioDi" class="form-control" placeholder="" >
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.gioDi.touched && rfBenXe.controls.gioDi?.errors?.required">Phải nhập trường này.</span>
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.gioDi.touched && rfBenXe.controls.gioDi?.errors?.timerange">Giờ không hợp lệ.
+      Giờ có định dạng là: --:--, sau 05:00 và trước 23:00.</span>
+  </div>
+
+  <div class="form-group">
+    <label >gioDen</label>
+    <input type="text" name="" formControlName="gioDen" class="form-control" placeholder="" >
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.gioDen.touched && rfBenXe.controls.gioDen?.errors?.required">Phải nhập trường này.</span>
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.gioDen.touched && rfBenXe.controls.gioDen?.errors?.timerange">Giờ không hợp lệ.
+      Giờ có định dạng là: --:--, sau 05:00 và trước 23:00.</span>
+  </div>
+
+  <div class="form-group">
+    <label ></label>
+    <button type="submit" [disabled]="rfBenXe.invalid" class="btn btn-primary">Save</button>
+  </div>
+</form>

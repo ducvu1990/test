@@ -4,6 +4,8 @@ import com.codegym.ben_xe.model.BenXe;
 import com.codegym.ben_xe.repository.IBenXeRepository;
 import com.codegym.ben_xe.service.IBenXeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,8 +14,8 @@ public class BenXeService implements IBenXeService {
     @Autowired
     private IBenXeRepository benXeRepository;
     @Override
-    public List<BenXe> getAll() {
-        return this.benXeRepository.findAll();
+    public Page<BenXe> getAll(String soXe, Pageable pageable) {
+        return this.benXeRepository.searchAndSort(soXe, pageable);
     }
 
     @Override
@@ -51,5 +53,15 @@ public class BenXeService implements IBenXeService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Page<BenXe> sortDESC(Pageable pageable) {
+        return this.benXeRepository.sortDESC(pageable);
+    }
+
+    @Override
+    public Page<BenXe> sortASC(Pageable pageable) {
+        return this.benXeRepository.sortASC(pageable);
     }
 }

@@ -1,0 +1,138 @@
+{
+  "diaDiem": [
+    {
+      "id": 1,
+      "tenDiaDiem": "Quảng Trị"
+    },
+    {
+      "id": 2,
+      "tenDiaDiem": "Quảng Bình"
+    },
+    {
+      "id": 3,
+      "tenDiaDiem": "Huế"
+    },
+    {
+      "id": 4,
+      "tenDiaDiem": "Hà Nội"
+    },
+    {
+      "id": 5,
+      "tenDiaDiem": "Thanh Hóa"
+    },
+    {
+      "id": 6,
+      "tenDiaDiem": "Nha Trang"
+    },
+    {
+      "id": 7,
+      "tenDiaDiem": "Đà Nẵng"
+    }
+  ],
+  "loaiXe": [
+    {
+      "id": 1,
+      "tenLoaiXe": "Giường Nằm"
+    },
+    {
+      "id": 2,
+      "tenLoaiXe": "Ghế Ngồi"
+    }
+  ],
+  "nhaXe": [
+    {
+      "id": 1,
+      "tenNhaXe": "Phương Trang"
+    },
+    {
+      "id": 2,
+      "tenNhaXe": "Mai Linh"
+    },
+    {
+      "id": 3,
+      "tenNhaXe": "Hoàng Long"
+    }
+  ],
+  "benXe": [
+    {
+      "id": 1,
+      "soXe": "1231",
+      "loaiXe": {
+        "id": 1,
+        "tenLoaiXe": "Giường Nằm"
+      },
+      "nhaXe": {
+        "id": 2,
+        "tenNhaXe": "Mai Linh"
+      },
+      "diemDi": {
+        "id": 1,
+        "tenDiaDiem": "Quảng Trị"
+      },
+      "diemDen": {
+        "id": 6,
+        "tenDiaDiem": "Nha Trang"
+      },
+      "soDienThoai": "0935845632",
+      "email": "mailinh@Gmail.com",
+      "gioDi": "13:20",
+      "gioDen": "15:00",
+      "tenNhaXe": {
+        "id": 2,
+        "tenNhaXe": "Mai Linh"
+      }
+    },
+    {
+      "id": 2,
+      "soXe": "1231",
+      "loaiXe": {
+        "id": 1,
+        "tenLoaiXe": "Giường Nằm"
+      },
+      "nhaXe": {
+        "id": 1,
+        "tenNhaXe": "Phương Trang"
+      },
+      "diemDi": {
+        "id": 1,
+        "tenDiaDiem": "Quảng Trị"
+      },
+      "diemDen": {
+        "id": 1,
+        "tenDiaDiem": "Quảng Trị"
+      },
+      "soDienThoai": "0935845632",
+      "email": "mailinh@Gmail.com",
+      "gioDi": "13:20",
+      "gioDen": "15:00",
+      "tenNhaXe": {
+        "id": 1,
+        "tenNhaXe": "Phương Trang"
+      }
+    },
+    {
+      "soXe": "2222",
+      "loaiXe": {
+        "id": 1,
+        "tenLoaiXe": "Giường Nằm"
+      },
+      "nhaXe": {
+        "id": 2,
+        "tenNhaXe": "Mai Linh"
+      },
+      "diemDi": {
+        "id": 2,
+        "tenDiaDiem": "Quảng Bình"
+      },
+      "diemDen": {
+        "id": 1,
+        "tenDiaDiem": "Quảng Trị"
+      },
+      "soDienThoai": "0901234567",
+      "email": "mailinh@gmail.com",
+      "gioDi": "12:00",
+      "gioDen": "13:00",
+      "id": 3
+    }
+  ]
+}

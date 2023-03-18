@@ -9,8 +9,13 @@ import com.codegym.ben_xe.service.IDiaDiemService;
 import com.codegym.ben_xe.service.ILoaiXeService;
 import com.codegym.ben_xe.service.INhaXeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,9 +32,11 @@ public class BenXeRestControler {
     private INhaXeService nhaXeService;
     @Autowired
     private IDiaDiemService diaDiemService;
-    @GetMapping("")
-    public ResponseEntity<List<BenXe>> getAll(){
-        List<BenXe> benXeList = this.benXeService.getAll();
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<BenXe>> getAll(@PageableDefault(size = 2, page = 0)Pageable pageable,
+                                              @RequestParam(required = false,defaultValue = "") String soXe){
+        Page<BenXe> benXeList = this.benXeService.getAll(soXe, pageable);
         return new ResponseEntity<>(benXeList, HttpStatus.OK);
     }
     @GetMapping("/loaiXe")
@@ -48,7 +55,11 @@ public class BenXeRestControler {
         return new ResponseEntity<>(diaDiemList, HttpStatus.OK);
     }
     @PostMapping("/create")
-    public ResponseEntity<BenXe> create(@RequestBody BenXe benXe){
+    public ResponseEntity<BenXe> create(@Validated @RequestBody BenXe benXe,
+                                        BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
         if (this.benXeService.save(benXe)){
             return new ResponseEntity<>(HttpStatus.OK);
         }
