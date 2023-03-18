@@ -44,6 +44,7 @@ export class BenXeService {
   }
 
   create(benXe: BenXe): Observable<BenXe> {
+    debugger
     return this.httpClient.post<BenXe>('http://localhost:8080/api/ben-xe/create', benXe);
   }
 }

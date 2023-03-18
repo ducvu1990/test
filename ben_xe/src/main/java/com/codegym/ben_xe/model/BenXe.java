@@ -39,28 +39,24 @@ public class BenXe implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        BenXe benXe = (BenXe) target;
-        String gioDies = benXe.getGioDi();
-
-        if (false){
-            errors.rejectValue("dateOfBirth", "dateOfBirth","ngày sinh không đúng, bạn phải " +
-                    "lớn hơn 18 tuổi và nhỏ hơn 90 tuổi");
-        }
+//        BenXe benXe = (BenXe) target;
+//        String gioDies = benXe.getGioDi();
+//
+//        if (false){
+//            errors.rejectValue("dateOfBirth", "dateOfBirth","ngày sinh không đúng, bạn phải " +
+//                    "lớn hơn 18 tuổi và nhỏ hơn 90 tuổi");
+//        }
     }
 
-    @NotBlank(message = "không được để khoảng trống")
     @ManyToOne
     @JoinColumn(name = "laoiXeId",referencedColumnName = "id")
     private LoaiXe  loaiXe;
-    @NotBlank(message = "không được để khoảng trống")
     @ManyToOne
     @JoinColumn(name = "nhaXeId",referencedColumnName = "id")
     private NhaXe nhaXe;
-    @NotBlank(message = "không được để khoảng trống")
     @ManyToOne
     @JoinColumn(name = "diemDiId",referencedColumnName = "id")
     private  DiaDiem diemDi;
-    @NotBlank(message = "không được để khoảng trống")
     @ManyToOne
     @JoinColumn(name = "diemDenId",referencedColumnName = "id")
     private DiaDiem diemDen;
