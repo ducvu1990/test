@@ -10,6 +10,7 @@ import com.codegym.ben_xe.service.ILoaiXeService;
 import com.codegym.ben_xe.service.INhaXeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -32,10 +33,12 @@ public class BenXeRestControler {
     private INhaXeService nhaXeService;
     @Autowired
     private IDiaDiemService diaDiemService;
-
+//    http://localhost:8080/api/ben-xe/search?soXe=' + soXe + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize
     @GetMapping("/search")
-    public ResponseEntity<Page<BenXe>> getAll(@PageableDefault(size = 2, page = 0)Pageable pageable,
-                                              @RequestParam(required = false,defaultValue = "") String soXe){
+    public ResponseEntity<Page<BenXe>> getAll(@RequestParam(required = false,defaultValue = "") String soXe,
+                                              @RequestParam(required = false, defaultValue = "0") int pageNumber,
+                                              @RequestParam(required = false, defaultValue = "0") int pageSize){
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<BenXe> benXeList = this.benXeService.getAll(soXe, pageable);
         return new ResponseEntity<>(benXeList, HttpStatus.OK);
     }

@@ -14,8 +14,9 @@ export class BenXeService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAll(soXe: string): Observable<BenXe[]> {
-    return this.httpClient.get<BenXe[]>('http://localhost:8080/api/ben-xe/search?soXe=' + soXe);
+  getAll(soXe: string, pageNumber: number, pageSize: number): Observable<Page<BenXe>> {
+    return this.httpClient.get<Page<BenXe>>('http://localhost:8080/api/ben-xe/search?soXe=' + soXe +
+      '&pageNumber=' + pageNumber + '&pageSize=' + pageSize);
   }
 
   getAllDiaDiem(): Observable<DiaDiem[]> {
@@ -45,4 +46,30 @@ export class BenXeService {
   create(benXe: BenXe): Observable<BenXe> {
     return this.httpClient.post<BenXe>('http://localhost:8080/api/ben-xe/create', benXe);
   }
+}
+
+export interface Page<T> {
+  content: T[];
+  pageable: {
+    sort: {
+      sorted: boolean;
+      unsorted: boolean;
+    };
+    pageNumber: number;
+    pageSize: number;
+    offset: number;
+    unpaged: boolean;
+  };
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  size: number;
+  number: number;
+  sort: {
+    sorted: boolean;
+    unsorted: boolean;
+  };
+  numberOfElements: number;
+  first: boolean;
+  empty: boolean;
 }

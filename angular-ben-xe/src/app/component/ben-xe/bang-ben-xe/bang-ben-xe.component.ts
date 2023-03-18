@@ -12,6 +12,10 @@ import {FormGroup} from '@angular/forms';
 export class BangBenXeComponent implements OnInit {
   benXes: BenXe[];
   soXe = '';
+  page = 0;
+  pageSize = 3;
+  pageCount = 0;
+  pageNumbers: number[] = [];
 
   constructor(private benXeService: BenXeService) {
   }
@@ -26,10 +30,31 @@ export class BangBenXeComponent implements OnInit {
   }
 
   getAll() {
-    this.benXeService.getAll(this.soXe).subscribe(benXees => {
-      this.benXes = benXees.content;
-      debugger
-    });
+    this.benXeService.getAll(this.soXe, this.page, this.pageSize)
+      .subscribe(benXees => {
+        this.benXes = benXees.content;
+        this.pageCount = benXees.totalPages;
+        this.pageNumbers = Array.from({length: this.pageCount}, (v, k) => k + 1);
+      });
+  }
+
+  previousPage() {
+    if (this.page > 0) {
+      this.page--;
+      this.getAll();
+    }
+  }
+
+  nextPage() {
+    if (this.page < this.pageCount) {
+      this.page++;
+      this.getAll();
+    }
+  }
+
+  goToPage(pageNumber: number) {
+    this.page = pageNumber;
+    this.getAll();
   }
 
   delete(soXe: string, id: number) {
