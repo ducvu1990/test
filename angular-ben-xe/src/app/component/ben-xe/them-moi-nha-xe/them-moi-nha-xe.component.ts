@@ -33,19 +33,31 @@ export class ThemMoiNhaXeComponent implements OnInit {
     this.benXeservice.getAllDiaDiem().subscribe(diaDiemes => {
       this.diaDiems = diaDiemes;
     });
+    // this.rfBenXe = new FormGroup({
+    //   soXe: new FormControl('', Validators.required),
+    //   loaiXe: new FormControl('', Validators.required),
+    //   nhaXe: new FormControl('', Validators.required),
+    //   diemDi: new FormControl('', Validators.required),
+    //   diemDen: new FormControl('', Validators.required),
+    //   soDienThoai: new FormControl('', [Validators.required, Validators.pattern('^(090|093|097)\\d{7}$')]),
+    //   email: new FormControl('', [Validators.required, Validators.email]),
+    //   gioDi: new FormControl('', [Validators.required, this.validateTimeRange]),
+    //   gioDen: new FormControl('', [Validators.required, this.validateTimeRange]),
+    // });
+
+
     this.rfBenXe = new FormGroup({
       soXe: new FormControl('', Validators.required),
       loaiXe: new FormControl('', Validators.required),
       nhaXe: new FormControl('', Validators.required),
       diemDi: new FormControl('', Validators.required),
       diemDen: new FormControl('', Validators.required),
-      soDienThoai: new FormControl('', [Validators.required, Validators.pattern('^(090|093|097)\\d{7}$')]),
+      soDienThoai: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       gioDi: new FormControl('', [Validators.required, this.validateTimeRange]),
       gioDen: new FormControl('', [Validators.required, this.validateTimeRange]),
     });
   }
-
   saveBenXe() {
     const benXe = this.rfBenXe.value;
     this.benXeservice.create(benXe).subscribe(() => {
@@ -56,8 +68,14 @@ export class ThemMoiNhaXeComponent implements OnInit {
         'success'
       );
     }, error => {
+      console.log(JSON.stringify(error));
+      for (const err of Object.keys(error.error)) {
+        if (error.error[err]) {
+          this.rfBenXe.controls[err].setErrors({errorBE: error.error[err]});
+        }
+      }
       Swal.fire(
-        'Thêm Mới thất bại!, số xe đã tồn tại',
+        'Thêm Mới thất bại!',
         'Your file has been deleted.',
         'error'
       );

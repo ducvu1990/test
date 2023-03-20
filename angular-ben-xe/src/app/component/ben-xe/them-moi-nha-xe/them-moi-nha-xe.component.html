@@ -55,6 +55,8 @@
           *ngIf="rfBenXe.controls.soDienThoai.touched && rfBenXe.controls.soDienThoai?.errors?.required">Phải nhập trường này.</span>
     <span style="color: red"
           *ngIf="rfBenXe.controls.soDienThoai.touched && rfBenXe.controls.soDienThoai?.errors?.pattern">Số điện thoại sai định dạng.</span>
+    <span style="color: red"
+          *ngIf="rfBenXe.controls.soDienThoai.touched && rfBenXe.controls.soDienThoai?.errors?.errorBE">Số điện thoại sai định dạng.</span>
   </div>
 
   <div class="form-group">

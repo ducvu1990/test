@@ -1,5 +1,6 @@
 package com.codegym.ben_xe.controler;
 
+import com.codegym.ben_xe.dto.BenXeErrorResponseDTO;
 import com.codegym.ben_xe.model.BenXe;
 import com.codegym.ben_xe.model.DiaDiem;
 import com.codegym.ben_xe.model.LoaiXe;
@@ -15,10 +16,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -57,10 +61,23 @@ public class BenXeRestControler {
         return new ResponseEntity<>(diaDiemList, HttpStatus.OK);
     }
     @PostMapping("/create")
-    public ResponseEntity<BenXe> create(@Validated @RequestBody BenXe benXe,
+    public ResponseEntity<BenXeErrorResponseDTO> create(@Validated @RequestBody BenXe benXe,
                                         BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+
+            Map<String,String> map = bindingResult.getFieldErrors().stream()
+                    .collect(Collectors.toMap(FieldError::getField, c -> c.getDefaultMessage()));
+
+            BenXeErrorResponseDTO errorDto = new BenXeErrorResponseDTO(
+                    map.get("soXe"),
+                    map.get("soDienThoai"),
+                    map.get("email"),
+                    map.get("gioDen"),
+                    map.get("gioDi")
+            );
+
+
+            return new ResponseEntity<BenXeErrorResponseDTO>(errorDto, HttpStatus.EXPECTATION_FAILED);
         }
         if (this.benXeService.save(benXe)){
             return new ResponseEntity<>(HttpStatus.OK);
